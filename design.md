@@ -14,6 +14,10 @@ Language: Python
 Code to support:
 Code to display the images, code to limit walking in certain areas, code to enter the screen code to do movement, code to handle damage
 
-* What data will be stored or manipulated by the program? How will it be encoded and organized? Wub
-* Describe the logic and/or code behind every interaction with the user, and behind everything displayed. Wub
+* What data will be stored or manipulated by the program? How will it be encoded and organized? 
+The program will have to store information on how much health the player has, where they are, how close they are to enemies, and how much health enemies have. It will be encoded as numbers, basically with certain variable representing different things.
+
+* Describe the logic and/or code behind every interaction with the user, and behind everything displayed. 
+Interactions will be based off of sprite detection, maybe a few annimations, etc. Sprite detection will be critical, as it will determine when fights begin, what area the player is in, and will also be how animations work. 
+
 * If your program uses an unusual or notable *algorithm*, what is the algorithm and how does it work? Wub
