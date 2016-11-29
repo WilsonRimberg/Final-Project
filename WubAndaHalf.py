@@ -3,14 +3,16 @@ from ggame import LineStyle, Color, Sprite, Sound, Frame
 
 SCREEN_WIDTH = 1420
 SCREEN_HEIGHT = 810
-potato=800
 background_asset1=ImageAsset("images/Green.png",)
 background_asset2=ImageAsset("images/starfield.jpg",)
 background1=Sprite(background_asset1, (0,0))
 background2=Sprite(background_asset2, (0,0))
+castle_asset = ImageAsset("images/castleyeah.png",)
+castle= Sprite(castle_asset, (850,200))
+castle.scale=.1
 spaceship_asset = ImageAsset("images/four_spaceship_by_albertov_with_thrust.png", 
         Frame(227,0,292-227,125), 4, 'vertical')
-spaceship = Sprite(spaceship_asset, (740, 405))
+spaceship = Sprite(spaceship_asset, (100, 100))
 spaceship.fxcenter = spaceship.fycenter = 0.5
 # Movement
 spaceship.dir = 3
@@ -19,6 +21,9 @@ spaceship.go = False
 spaceship.ygo= False
 spaceship.thrust = 0
 spaceship.thrustframe = 1
+background1.visible=True
+background2.visible=False
+castle.visible=False
 def left(b):
     spaceship.dir=-4
 def right(b):
@@ -31,8 +36,14 @@ def down(b):
 def step():
     if spaceship.go:
         spaceship.x += spaceship.dir
-        if spaceship.x + spaceship.width > potato:
-            background1=Sprite(background_asset2, (0,0))
+        if spaceship.x + spaceship.width > 800 and background1.visible==True:
+            background2.visible=True
+            background1.visible=False
+            castle.visible =True
+        if spaceship.collidingWith(castle):
+            background2.visible=False
+            background1.visible=True
+            castle.visible=False
         if spaceship.x + spaceship.width > SCREEN_WIDTH:
             spaceship.x -= spaceship.dir
             spaceship.rotation=(3.141592653589793238462643383/2)
