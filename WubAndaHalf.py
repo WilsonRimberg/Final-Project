@@ -8,12 +8,20 @@ background_asset2=ImageAsset("images/starfield.jpg",)
 background1=Sprite(background_asset1, (0,0))
 background2=Sprite(background_asset2, (0,0))
 castle_asset = ImageAsset("images/castleyeah.png",)
+potato_asset = ImageAsset("images/potato.png",)
+potato= Sprite(potato_asset, (300,600))
+potato.scale=.3
 castle= Sprite(castle_asset, (850,200))
 castle.scale=.1
 spaceship_asset = ImageAsset("images/four_spaceship_by_albertov_with_thrust.png", 
         Frame(227,0,292-227,125), 4, 'vertical')
 spaceship = Sprite(spaceship_asset, (100, 100))
 spaceship.fxcenter = spaceship.fycenter = 0.5
+class Wall(Sprite):
+    asset= wall_asset=ImageAsset("images/wall.png",)
+    def __init__(self, position):
+        super().__init__(Wall.asset, position)
+        self.scale=.3
 # Movement
 spaceship.dir = 3
 spaceship.bob=3
@@ -24,6 +32,7 @@ spaceship.thrustframe = 1
 background1.visible=True
 background2.visible=False
 castle.visible=False
+potato.visible= True
 def left(b):
     spaceship.dir=-4
 def right(b):
@@ -32,18 +41,19 @@ def up(b):
     spaceship.bob=-4
 def down(b):
     spaceship.bob=4
-    
 def step():
-    if spaceship.go:
-        spaceship.x += spaceship.dir
-        if spaceship.x + spaceship.width > 800 and background1.visible==True:
-            background2.visible=True
-            background1.visible=False
-            castle.visible =True
-        if spaceship.collidingWith(castle):
+    if spaceship.collidingWith(castle) and castle.visible==True:
             background2.visible=False
             background1.visible=True
             castle.visible=False
+            potato.visible=True
+    if spaceship.collidingWith(potato) and potato.visible==True:
+            background2.visible=True
+            background1.visible=False
+            castle.visible =True
+            potato.visible=False
+    if spaceship.go:
+        spaceship.x += spaceship.dir
         if spaceship.x + spaceship.width > SCREEN_WIDTH:
             spaceship.x -= spaceship.dir
             spaceship.rotation=(3.141592653589793238462643383/2)
@@ -82,6 +92,11 @@ def leftKey(event):
     spaceship.thrust = 1
     spaceship.rotation=(3.141592653589793238462643383/2)
     left(spaceship)
+def leftUp(event):
+    spaceship.go = False
+    spaceship.ygo= False
+    spaceship.thrust = 1
+    left(spaceship)
     
 
 def rightKey(event):
@@ -90,6 +105,12 @@ def rightKey(event):
     spaceship.thrust = 1
     spaceship.rotation=(3.141592653589793238462643383*3)/2
     right(spaceship)
+def rightUp(event):
+    spaceship.go = False
+    spaceship.ygo= False
+    spaceship.thrust = 1
+    right(spaceship)
+    
 
 def upKey(event):
     spaceship.ygo = True
@@ -97,6 +118,12 @@ def upKey(event):
     spaceship.thrust = 1
     spaceship.rotation=0
     up(spaceship)
+def upUp(event):
+    spaceship.go = False
+    spaceship.ygo= False
+    spaceship.thrust = 1
+    up(spaceship)
+    
     
 def downKey (event):
     spaceship.ygo = True
@@ -104,10 +131,20 @@ def downKey (event):
     spaceship.thrust = 1
     spaceship.rotation=3.141592653589793238462643383
     down(spaceship)
+def downUp(event):
+    spaceship.go = False
+    spaceship.ygo= False
+    spaceship.thrust = 1
+    down(spaceship)
+
 myapp = App(SCREEN_WIDTH, SCREEN_HEIGHT)
 myapp.listenKeyEvent('keydown', 'a', leftKey)
+myapp.listenKeyEvent('keyup', 'a', leftUp)
 myapp.listenKeyEvent('keydown', 'd', rightKey)
+myapp.listenKeyEvent('keyup', 'd', rightUp)
 myapp.listenKeyEvent('keydown', 'w', upKey)
+myapp.listenKeyEvent('keyup', 'w', upUp)
 myapp.listenKeyEvent('keydown', 's', downKey)
+myapp.listenKeyEvent('keyup', 's', downUp)
 myapp.run(step)
 
