@@ -25,10 +25,7 @@ class Wall1(Sprite):
         super().__init__(Wall1.asset, position)
         self.scale=.3
         self.fxcenter = self.fycenter = 0.5
-        if background1.visible==False:
-            self.visible=False
-        if background1.visible==True:
-            self.visible=True
+        
 class Wall2(Sprite):
     asset= wall_asset=ImageAsset("images/wall.png",)
     def __init__(self, position):
@@ -36,11 +33,17 @@ class Wall2(Sprite):
         self.scale=.3
         self.fxcenter = self.fycenter = 0.5
         self.rotation=(3.14159265358979/2)
-        if background1.visible==False:
-            self.visible=False
-        if background1.visible==True:
-            self.visible=True
-
+uno=[]
+for x in range(0,14):
+    uno.append(Wall1((112+x*88,672)))
+print(uno)
+for x in range(0,14):
+    uno.append(Wall1((112+x*88, 30)))
+for x in range(0,7):
+    uno.append(Wall2((81,87+x*88)))
+for x in range(0,7):
+    uno.append(Wall2((1287,87+x*88)))
+print(uno)
 # Movement
 spaceship.dir = 3
 spaceship.bob=3
@@ -66,11 +69,18 @@ def step():
             background1.visible=True
             castle.visible=False
             potato.visible=True
+            for x in uno:
+                x.visible=True
+            
     if spaceship.collidingWith(potato) and potato.visible==True:
             background2.visible=True
             background1.visible=False
             castle.visible =True
             potato.visible=False
+            Wall1.visible=False
+            Wall1.visible=False
+            for x in uno:
+                x.visible=False
     if spaceship.go:
         spaceship.x += spaceship.dir
         if spaceship.x + spaceship.width > SCREEN_WIDTH:
@@ -155,48 +165,6 @@ def downUp(event):
     spaceship.ygo= False
     spaceship.thrust = 1
     down(spaceship)
-Wall1((112,672))
-Wall1((112+1*88,672))
-Wall1((112+2*88,672))
-Wall1((112+3*88,672))
-Wall1((112+4*88,672))
-Wall1((112+5*88,672))
-Wall1((112+6*88,672))
-Wall1((112+7*88,672))
-Wall1((112+8*88,672))
-Wall1((112+9*88,672))
-Wall1((112+10*88,672))
-Wall1((112+11*88,672))
-Wall1((112+12*88,672))
-Wall1((112+13*88,672))
-Wall1((112,30))
-Wall1((112+1*88,30))
-Wall1((112+2*88,30))
-Wall1((112+3*88,30))
-Wall1((112+4*88,30))
-Wall1((112+5*88,30))
-Wall1((112+6*88,30))
-Wall1((112+7*88,30))
-Wall1((112+8*88,30))
-Wall1((112+9*88,30))
-Wall1((112+10*88,30))
-Wall1((112+11*88,30))
-Wall1((112+12*88,30))
-Wall1((112+13*88,30))
-Wall2((81,87))
-Wall2((81,87+1*88))
-Wall2((81,87+2*88))
-Wall2((81,87+3*88))
-Wall2((81,87+4*88))
-Wall2((81,87+5*88))
-Wall2((81,87+6*88))
-Wall2((1287,87))
-Wall2((1287,87+1*88))
-Wall2((1287,87+2*88))
-Wall2((1287,87+3*88))
-Wall2((1287,87+4*88))
-Wall2((1287,87+5*88))
-Wall2((1287,87+6*88))
 
 myapp = App(SCREEN_WIDTH, SCREEN_HEIGHT)
 myapp.listenKeyEvent('keydown', 'a', leftKey)
