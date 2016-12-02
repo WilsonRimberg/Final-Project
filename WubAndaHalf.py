@@ -29,14 +29,13 @@ class Wall1(Sprite):
 class Wall2(Sprite):
     asset= wall_asset=ImageAsset("images/wall.png",)
     def __init__(self, position):
-        super().__init__(Wall1.asset, position)
+        super().__init__(Wall2.asset, position)
         self.scale=.3
         self.fxcenter = self.fycenter = 0.5
         self.rotation=(3.14159265358979/2)
 uno=[]
 for x in range(0,14):
     uno.append(Wall1((112+x*88,672)))
-print(uno)
 for x in range(0,14):
     uno.append(Wall1((112+x*88, 30)))
 for x in range(0,7):
@@ -77,8 +76,6 @@ def step():
             background1.visible=False
             castle.visible =True
             potato.visible=False
-            Wall1.visible=False
-            Wall1.visible=False
             for x in uno:
                 x.visible=False
     if spaceship.go:
