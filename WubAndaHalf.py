@@ -17,7 +17,7 @@ castle.scale=.1
 castle.fxcenter = castle.fycenter = 0.5
 spaceship_asset = ImageAsset("images/four_spaceship_by_albertov_with_thrust.png", 
         Frame(227,0,292-227,125), 4, 'vertical')
-spaceship = Sprite(spaceship_asset, (100, 100))
+spaceship = Sprite(spaceship_asset, (200, 200))
 spaceship.fxcenter = spaceship.fycenter = 0.5
 class Wall1(Sprite):
     asset= wall_asset=ImageAsset("images/wall.png",)
@@ -70,7 +70,6 @@ def step():
             potato.visible=True
             for x in uno:
                 x.visible=True
-            
     if spaceship.collidingWith(potato) and potato.visible==True:
             background2.visible=True
             background1.visible=False
@@ -78,14 +77,14 @@ def step():
             potato.visible=False
             for x in uno:
                 x.visible=False
+    if len(spaceship.collidingWithSprites(Wall1)) > 0 and potato.visible==True:
+        stopx()
     if spaceship.go:
         spaceship.x += spaceship.dir
         if spaceship.x + spaceship.width > SCREEN_WIDTH:
             spaceship.x -= spaceship.dir
-            spaceship.rotation=(3.141592653589793238462643383/2)
         if spaceship.x < 60:
             spaceship.x -= spaceship.dir
-            spaceship.rotation=((3*3.141592653589793238462643383)/2)
         if spaceship.thrust == 1:
             spaceship.setImage(spaceship.thrustframe)
             spaceship.thrustframe += 1
@@ -103,7 +102,6 @@ def ystep():
             spaceship.rotation=0
         if spaceship.y < 60:
             spaceship.y -= spaceship.bob
-            spaceship.rotation=3.141592653589793238462643383
         if spaceship.thrust == 1:
             spaceship.setImage(spaceship.thrustframe)
             spaceship.thrustframe += 1
@@ -162,6 +160,9 @@ def downUp(event):
     spaceship.ygo= False
     spaceship.thrust = 1
     down(spaceship)
+    
+def stopx(event):
+    spaceship.dir-=0
 
 myapp = App(SCREEN_WIDTH, SCREEN_HEIGHT)
 myapp.listenKeyEvent('keydown', 'a', leftKey)
