@@ -8,6 +8,9 @@ background_asset2=ImageAsset("images/starfield.jpg",)
 background1=Sprite(background_asset1, (0,0))
 background2=Sprite(background_asset2, (0,0))
 castle_asset = ImageAsset("images/castleyeah.png",)
+factory_asset = ImageAsset("images/Factory.png",)
+factory=Sprite(factory_asset,(100,100))
+factory.scale=.25
 potato_asset = ImageAsset("images/potato.png",)
 potato= Sprite(potato_asset, (300,600))
 potato.scale=.3
@@ -54,6 +57,7 @@ background1.visible=True
 background2.visible=False
 castle.visible=False
 potato.visible= True
+factory.visible=False
 def left(b):
     spaceship.dir=-4
 def right(b):
@@ -63,11 +67,21 @@ def up(b):
 def down(b):
     spaceship.bob=4
 def step():
+    if spaceship.collidingWith(factory) and castle.visible==True:
+            background2.visible=False
+            background1.visible=False
+            castle.visible=False
+            potato.visible=False
+            for x in uno:
+                x.visible=False
     if spaceship.collidingWith(castle) and castle.visible==True:
             background2.visible=False
             background1.visible=True
             castle.visible=False
             potato.visible=True
+            spaceship.x=300
+            spaceship.y=480
+            factory.visible=False
             for x in uno:
                 x.visible=True
     if spaceship.collidingWith(potato) and potato.visible==True:
@@ -75,14 +89,19 @@ def step():
             background1.visible=False
             castle.visible =True
             potato.visible=False
+            factory.visible=True
+            spaceship.x=850
+            spaceship.y=330
             for x in uno:
                 x.visible=False
-    if len(spaceship.collidingWithSprites(Wall1)) > 0 and potato.visible==True:
-        stopx()
     if spaceship.go:
         spaceship.x += spaceship.dir
         if spaceship.x + spaceship.width > SCREEN_WIDTH:
             spaceship.x -= spaceship.dir
+        if spaceship.x +spaceship.width > 1280 and potato.visible==True:
+             spaceship.x -= spaceship.dir
+        if spaceship.x < 153 and potato.visible==True:
+             spaceship.x -= spaceship.dir
         if spaceship.x < 60:
             spaceship.x -= spaceship.dir
         if spaceship.thrust == 1:
@@ -100,6 +119,10 @@ def ystep():
         if spaceship.y +spaceship.height > SCREEN_HEIGHT+60:
             spaceship.y -= spaceship.bob
             spaceship.rotation=0
+        if spaceship.y +spaceship.height > 722 and potato.visible==True:
+             spaceship.y -= spaceship.bob
+        if spaceship.y < 104 and potato.visible==True:
+            spaceship.y-=spaceship.bob
         if spaceship.y < 60:
             spaceship.y -= spaceship.bob
         if spaceship.thrust == 1:
