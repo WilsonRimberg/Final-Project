@@ -12,16 +12,39 @@ factory_asset = ImageAsset("images/Factory.png",)
 factory=Sprite(factory_asset,(100,100))
 factory.scale=.25
 potato_asset = ImageAsset("images/potato.png",)
+sun_asset = ImageAsset("images/sun.png",)
+sun=Sprite(sun_asset, (1200, 405))
+sun.center=.5
 potato= Sprite(potato_asset, (300,600))
 potato.scale=.3
 potato.fxcenter = potato.fycenter = 0.5
 castle= Sprite(castle_asset, (850,200))
 castle.scale=.1
 castle.fxcenter = castle.fycenter = 0.5
+class FactoryFloor(Sprite):
+    factoryflr= floor_asset=ImageAsset("images/stonefloor.jpg",)
+    def __init__(self, position):
+        super().__init__(FactoryFloor.factoryflr, position)
+        self.scale=.15
+        self.fxcenter = self.fycenter = 0.5
+does=[]
+for x in range (0,14):
+    does.append(FactoryFloor((1200-x*76,600)))
+for x in range (0,14):
+    does.append(FactoryFloor((1200-x*76,524)))
+for x in range (0,6):
+    does.append(FactoryFloor((212,448-76*x)))
+for x in range (0,6):
+    does.append(FactoryFloor((288,448-76*x)))
+for x in range (0,12):
+    does.append(FactoryFloor((364+76*x,68)))
+for x in range (0,12):
+    does.append(FactoryFloor((364+76*x,144)))
 spaceship_asset = ImageAsset("images/four_spaceship_by_albertov_with_thrust.png", 
         Frame(227,0,292-227,125), 4, 'vertical')
 spaceship = Sprite(spaceship_asset, (200, 200))
 spaceship.fxcenter = spaceship.fycenter = 0.5
+
 class Wall1(Sprite):
     asset= wall_asset=ImageAsset("images/wall.png",)
     def __init__(self, position):
@@ -36,6 +59,7 @@ class Wall2(Sprite):
         self.scale=.3
         self.fxcenter = self.fycenter = 0.5
         self.rotation=(3.14159265358979/2)
+
 uno=[]
 for x in range(0,14):
     uno.append(Wall1((112+x*88,672)))
@@ -58,6 +82,7 @@ background2.visible=False
 castle.visible=False
 potato.visible= True
 factory.visible=False
+sun.visible=False
 def left(b):
     spaceship.dir=-4
 def right(b):
@@ -67,13 +92,31 @@ def up(b):
 def down(b):
     spaceship.bob=4
 def step():
+    if background1.visible==True:
+        for x in does:
+                x.visible=False
+    if spaceship.collidingWith(sun) and sun.visible==True:
+            background2.visible=True
+            castle.visible=True
+            factory.visible=True
+            sun.visible=False
+            spaceship.x=100
+            spaceship.y=300
+            for x in does:
+                x.visible=False
     if spaceship.collidingWith(factory) and castle.visible==True:
             background2.visible=False
             background1.visible=False
             castle.visible=False
             potato.visible=False
+            factory.visible=False
+            sun.visible=True
+            spaceship.x=1150
+            spaceship.y=430
             for x in uno:
                 x.visible=False
+            for x in does:
+                x.visible=True
     if spaceship.collidingWith(castle) and castle.visible==True:
             background2.visible=False
             background1.visible=True
