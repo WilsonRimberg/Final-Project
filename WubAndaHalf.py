@@ -12,9 +12,6 @@ factory_asset = ImageAsset("images/Factory.png",)
 factory=Sprite(factory_asset,(100,100))
 factory.scale=.25
 potato_asset = ImageAsset("images/potato.png",)
-sun_asset = ImageAsset("images/sun.png",)
-sun=Sprite(sun_asset, (1200, 405))
-sun.center=.5
 potato= Sprite(potato_asset, (300,600))
 potato.scale=.3
 potato.fxcenter = potato.fycenter = 0.5
@@ -71,6 +68,9 @@ for x in range(0,7):
     uno.append(Wall2((1287,87+x*88)))
 print(uno)
 # Movement
+sun_asset = ImageAsset("images/sun.png",)
+sun=Sprite(sun_asset, (1150, 500))
+sun.center=.5
 spaceship.dir = 3
 spaceship.bob=3
 spaceship.go = False
@@ -83,6 +83,7 @@ castle.visible=False
 potato.visible= True
 factory.visible=False
 sun.visible=False
+
 def left(b):
     spaceship.dir=-4
 def right(b):
@@ -111,8 +112,8 @@ def step():
             potato.visible=False
             factory.visible=False
             sun.visible=True
-            spaceship.x=1150
-            spaceship.y=430
+            spaceship.x=1050
+            spaceship.y=550
             for x in uno:
                 x.visible=False
             for x in does:
@@ -141,6 +142,7 @@ def step():
         spaceship.x += spaceship.dir
         if spaceship.x + spaceship.width > SCREEN_WIDTH:
             spaceship.x -= spaceship.dir
+        if sun.visible==True and spaceship.colliding
         if spaceship.x +spaceship.width > 1280 and potato.visible==True:
              spaceship.x -= spaceship.dir
         if spaceship.x < 153 and potato.visible==True:
