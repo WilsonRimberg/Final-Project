@@ -3,10 +3,15 @@ from ggame import LineStyle, Color, Sprite, Sound, Frame
 
 SCREEN_WIDTH = 1420
 SCREEN_HEIGHT = 810
+black=Color(0x000000, 1.0)
+edge=LineStyle(1,black)
 background_asset1=ImageAsset("images/Green.png",)
 background_asset2=ImageAsset("images/starfield.jpg",)
+background_asset3=RectangleAsset(170,810,edge, black)
+background_asset4
 background1=Sprite(background_asset1, (0,0))
 background2=Sprite(background_asset2, (0,0))
+background3=Sprite(background_asset3, (0,0))
 castle_asset = ImageAsset("images/castleyeah.png",)
 factory_asset = ImageAsset("images/Factory.png",)
 factory=Sprite(factory_asset,(100,100))
@@ -83,6 +88,7 @@ castle.visible=False
 potato.visible= True
 factory.visible=False
 sun.visible=False
+background3.visible=False
 
 def left(b):
     spaceship.dir=-4
@@ -98,6 +104,7 @@ def step():
                 x.visible=False
     if spaceship.collidingWith(sun) and sun.visible==True:
             background2.visible=True
+            background3.visible=False
             castle.visible=True
             factory.visible=True
             sun.visible=False
@@ -108,6 +115,7 @@ def step():
     if spaceship.collidingWith(factory) and castle.visible==True:
             background2.visible=False
             background1.visible=False
+            background3.visible=True
             castle.visible=False
             potato.visible=False
             factory.visible=False
@@ -142,7 +150,10 @@ def step():
         spaceship.x += spaceship.dir
         if spaceship.x + spaceship.width > SCREEN_WIDTH:
             spaceship.x -= spaceship.dir
-        if sun.visible==True and spaceship.colliding
+        #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)>0:
+            #spaceship.x += spaceship.dir
+        #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)==0:
+            #spaceship.x -= spaceship.dir
         if spaceship.x +spaceship.width > 1280 and potato.visible==True:
              spaceship.x -= spaceship.dir
         if spaceship.x < 153 and potato.visible==True:
