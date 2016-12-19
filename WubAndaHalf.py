@@ -7,8 +7,7 @@ black=Color(0x000000, 1.0)
 edge=LineStyle(1,black)
 background_asset1=ImageAsset("images/Green.png",)
 background_asset2=ImageAsset("images/starfield.jpg",)
-background_asset3=RectangleAsset(170,810,edge, black)
-background_asset4
+background_asset3=RectangleAsset(1420,810,edge, black)
 background1=Sprite(background_asset1, (0,0))
 background2=Sprite(background_asset2, (0,0))
 background3=Sprite(background_asset3, (0,0))
@@ -46,6 +45,7 @@ spaceship_asset = ImageAsset("images/four_spaceship_by_albertov_with_thrust.png"
         Frame(227,0,292-227,125), 4, 'vertical')
 spaceship = Sprite(spaceship_asset, (200, 200))
 spaceship.fxcenter = spaceship.fycenter = 0.5
+spaceship.scale=.6
 
 class Wall1(Sprite):
     asset= wall_asset=ImageAsset("images/wall.png",)
@@ -150,10 +150,19 @@ def step():
         spaceship.x += spaceship.dir
         if spaceship.x + spaceship.width > SCREEN_WIDTH:
             spaceship.x -= spaceship.dir
-        #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)>0:
-            #spaceship.x += spaceship.dir
-        #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)==0:
-            #spaceship.x -= spaceship.dir
+        if background3.visible==True: 
+            if spaceship.x<1300 and spaceship.x>400:
+                if spaceship.y<800 and spaceship.y>400:
+                    spaceship.x+=spaceship.dir
+                if spaceship.y>30 and spaceship.y<300:
+                    spaceship.x+=spaceship.dir
+                else:
+                     spaceship.x-=spaceship.dir
+            if spaceship.x<400 and spaceship.x>200:
+                if spaceship.y<800 and spaceship.y>30:
+                    spaceship.x+=spaceship.dir
+                else:
+                    spaceship.x-=spaceship.dir
         if spaceship.x +spaceship.width > 1280 and potato.visible==True:
              spaceship.x -= spaceship.dir
         if spaceship.x < 153 and potato.visible==True:
@@ -175,6 +184,23 @@ def ystep():
         if spaceship.y +spaceship.height > SCREEN_HEIGHT+60:
             spaceship.y -= spaceship.bob
             spaceship.rotation=0
+        if background3.visible==True: 
+            if spaceship.x<1300 and spaceship.x>400:
+                if spaceship.y<800 and spaceship.y>400:
+                    spaceship.y+=spaceship.bob
+                if spaceship.y>30 and spaceship.y<300:
+                    spaceship.y+=spaceship.bob
+                else:
+                    spaceship.y-=spaceship.bob 
+            if spaceship.x<400 and spaceship.x>200:
+                if spaceship.y<800 and spaceship.y>30:
+                    spaceship.y+=spaceship.bob
+                else:
+                    spaceship.t-=spaceship.bob
+        #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)>0:
+            #spaceship.y += spaceship.bob
+        #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)==0:
+            #spaceship.x -= spaceship.bob
         if spaceship.y +spaceship.height > 722 and potato.visible==True:
              spaceship.y -= spaceship.bob
         if spaceship.y < 104 and potato.visible==True:
