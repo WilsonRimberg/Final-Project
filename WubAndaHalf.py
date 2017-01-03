@@ -1,10 +1,14 @@
-from ggame import App, RectangleAsset, ImageAsset, SoundAsset
+from ggame import App, RectangleAsset, ImageAsset, SoundAsset, TextAsset
 from ggame import LineStyle, Color, Sprite, Sound, Frame
 
 SCREEN_WIDTH = 1420
 SCREEN_HEIGHT = 810
 black=Color(0x000000, 1.0)
 edge=LineStyle(1,black)
+background_asset4=TextAsset("Game Over.", align='center', style='100px Arial', width=1000 )
+background_asset5=TextAsset("Press 'Return' to restart.")
+background4=Sprite(background_asset4, (500,500))
+background5=Sprite(background_asset5, (600,600))
 background_asset1=ImageAsset("images/Green.png",)
 background_asset2=ImageAsset("images/starfield.jpg",)
 background_asset3=RectangleAsset(1420,810,edge, black)
@@ -15,9 +19,9 @@ castle_asset = ImageAsset("images/castleyeah.png",)
 factory_asset = ImageAsset("images/Factory.png",)
 factory=Sprite(factory_asset,(100,100))
 factory.scale=.25
-potato_asset = ImageAsset("images/potato.png",)
-potato= Sprite(potato_asset, (300,600))
-potato.scale=.3
+potato_asset = ImageAsset("images/door.jpg",)
+potato= Sprite(potato_asset, (300,675))
+potato.scale=.05
 potato.fxcenter = potato.fycenter = 0.5
 castle= Sprite(castle_asset, (850,200))
 castle.scale=.1
@@ -151,18 +155,18 @@ def step():
         if spaceship.x + spaceship.width > SCREEN_WIDTH:
             spaceship.x -= spaceship.dir
         if background3.visible==True: 
-            if spaceship.x<1300 and spaceship.x>400:
+            if spaceship.x<1300 and spaceship.x>300:
                 if spaceship.y<800 and spaceship.y>400:
                     spaceship.x+=spaceship.dir
                 if spaceship.y>30 and spaceship.y<300:
                     spaceship.x+=spaceship.dir
                 else:
                      spaceship.x-=spaceship.dir
-            if spaceship.x<400 and spaceship.x>200:
+            if spaceship.x<320 and spaceship.x>200:
                 if spaceship.y<800 and spaceship.y>30:
                     spaceship.x+=spaceship.dir
                 else:
-                    spaceship.x-=spaceship.dir
+                   spaceship.x-=spaceship.dir
         if spaceship.x +spaceship.width > 1280 and potato.visible==True:
              spaceship.x -= spaceship.dir
         if spaceship.x < 153 and potato.visible==True:
@@ -185,18 +189,18 @@ def ystep():
             spaceship.y -= spaceship.bob
             spaceship.rotation=0
         if background3.visible==True: 
-            if spaceship.x<1300 and spaceship.x>400:
-                if spaceship.y<800 and spaceship.y>400:
+            if spaceship.x<1300 and spaceship.x>200:
+                if spaceship.y<605 and spaceship.y>520:
                     spaceship.y+=spaceship.bob
                 if spaceship.y>30 and spaceship.y<300:
                     spaceship.y+=spaceship.bob
                 else:
                     spaceship.y-=spaceship.bob 
-            if spaceship.x<400 and spaceship.x>200:
+            if spaceship.x<320 and spaceship.x>200:
                 if spaceship.y<800 and spaceship.y>30:
                     spaceship.y+=spaceship.bob
                 else:
-                    spaceship.t-=spaceship.bob
+                    spaceship.y-=spaceship.bob
         #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)>0:
             #spaceship.y += spaceship.bob
         #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)==0:
