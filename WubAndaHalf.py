@@ -5,8 +5,8 @@ SCREEN_WIDTH = 1420
 SCREEN_HEIGHT = 810
 black=Color(0x000000, 1.0)
 edge=LineStyle(1,black)
-background_asset4=TextAsset("Game Over.", align='center', style='100px Arial', width=1000 )
-background_asset5=TextAsset("Press 'Return' to restart.")
+background_asset4=TextAsset("Game Over.", align='center', style='200px Arial', width=2000 )
+background_asset5=TextAsset("Press 'Return' to restart.", align='center', style='40px Arial', width=1000)
 background4=Sprite(background_asset4, (500,500))
 background5=Sprite(background_asset5, (600,600))
 background_asset1=ImageAsset("images/Green.png",)
