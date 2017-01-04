@@ -201,7 +201,7 @@ def ystep():
                     spaceship.y+=spaceship.bob
                 else:
                     spaceship.y-=spaceship.bob 
-            if spaceship.x<320 and spaceship.x>250:
+            if spaceship.x<320 and spaceship.x>180:
                 if spaceship.y<800 and spaceship.y>30:
                     spaceship.y+=spaceship.bob
                 else:
