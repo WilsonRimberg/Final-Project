@@ -162,11 +162,16 @@ def step():
                     spaceship.x+=spaceship.dir
                 else:
                      spaceship.x-=spaceship.dir
-            if spaceship.x<320 and spaceship.x>200:
+            if spaceship.x<320 and spaceship.x>250:
                 if spaceship.y<800 and spaceship.y>30:
                     spaceship.x+=spaceship.dir
                 else:
                    spaceship.x-=spaceship.dir
+            if spaceship.y<400 and spaceship.y>30:
+                if spaceship.x<320 and spaceship.x>200:
+                    spaceship.x+=spaceship.dir
+                else:
+                    spaceship.x-=spaceship.dir
         if spaceship.x +spaceship.width > 1280 and potato.visible==True:
              spaceship.x -= spaceship.dir
         if spaceship.x < 153 and potato.visible==True:
@@ -196,7 +201,7 @@ def ystep():
                     spaceship.y+=spaceship.bob
                 else:
                     spaceship.y-=spaceship.bob 
-            if spaceship.x<320 and spaceship.x>200:
+            if spaceship.x<320 and spaceship.x>250:
                 if spaceship.y<800 and spaceship.y>30:
                     spaceship.y+=spaceship.bob
                 else:
