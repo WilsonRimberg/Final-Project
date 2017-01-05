@@ -111,6 +111,21 @@ def step():
     if background1.visible==True:
         for x in does:
                 x.visible=False
+    if spaceship.visible==False:
+            background2.visible=False
+            background1.visible=False
+            background3.visible=False
+            castle.visible=False
+            potato.visible=False
+            factory.visible=False
+            sun.visible=False
+            spaceship.x=1050
+            spaceship.y=550
+            chips.visible=False
+            for x in uno:
+                x.visible=False
+            for x in does:
+                x.visible=False
     if spaceship.collidingWith(chips) and chips.visible==True:
             sun.visible=True
             winning=True
@@ -133,7 +148,7 @@ def step():
             potato.visible=False
             factory.visible=False
             sun.visible=False
-            spaceship.x=1050
+            spaceship.x=1000
             spaceship.y=550
             chips.visible=True
             for x in uno:
@@ -165,29 +180,36 @@ def step():
         if spaceship.x + spaceship.width > SCREEN_WIDTH:
             spaceship.x -= spaceship.dir
         if background3.visible==True: 
-            if spaceship.x<1300 and spaceship.x>300:
+            if spaceship.x<1300 and spaceship.x>400:
                 if spaceship.y<800 and spaceship.y>400:
                     spaceship.x+=spaceship.dir
-                if spaceship.y>50 and spaceship.y<150:
+                if spaceship.y<150 and spaceship.y:
                     spaceship.x+=spaceship.dir
-                else:
+                if spaceship.y>150 and spaceship.y<520:
                      spaceship.x-=spaceship.dir
+                     spaceship.visible=False
+                     print("1")
             if spaceship.x<320 and spaceship.x>250:
                 if spaceship.y<800 and spaceship.y>30:
                     spaceship.x+=spaceship.dir
                 else:
-                   spaceship.x-=spaceship.dir
+                   spaceship.visible=False
+                   print("2")
             if spaceship.y<400 and spaceship.y>30:
                 if spaceship.x<320 and spaceship.x>200:
                     spaceship.x+=spaceship.dir
                 else:
-                    spaceship.x-=spaceship.dir
+                    spaceship.visible=False
+                    print("3")
             if spaceship.x>1200:
-                spaceship.x-=spaceship.dir
+                spaceship.visible=False
+                print("4")
             if spaceship.x<210:
-                spaceship.x-=spaceship.dir
+                spaceship.visible=False
+                print("5")
             if spaceship.y>605:
-                spaceship.x-=spaceship.dir
+                spaceship.visible=False
+                print("6")
         if spaceship.x +spaceship.width > 1280 and potato.visible==True:
              spaceship.x -= spaceship.dir
         if spaceship.x < 153 and potato.visible==True:
@@ -210,24 +232,30 @@ def ystep():
             spaceship.y -= spaceship.bob
             spaceship.rotation=0
         if background3.visible==True: 
-            if spaceship.x<1300 and spaceship.x>200:
+            if spaceship.x<1300 and spaceship.x>400:
                 if spaceship.y<605 and spaceship.y>520:
                     spaceship.y+=spaceship.bob
                 if spaceship.y>50 and spaceship.y<150:
                     spaceship.y+=spaceship.bob
-                else:
-                    spaceship.y-=spaceship.bob 
+                if spaceship.y>150 and spaceship.y<520:
+                    spaceship.y-=spaceship.bob
+                    spaceship.visible=False
+                    print("7")
             if spaceship.x<320 and spaceship.x>180:
                 if spaceship.y<800 and spaceship.y>30:
                     spaceship.y+=spaceship.bob
                 else:
-                    spaceship.y-=spaceship.bob
+                    spaceship.visible=False
+                    print("8")
             if spaceship.x>1200:
-                spaceship.y-=spaceship.bob 
+                spaceship.visible=False
+                print("9")
             if spaceship.x<210:
-                spaceship.y-=spaceship.bob
+                spaceship.visible=False
+                print("10")
             if spaceship.y>605:
-                spaceship.y-=spaceship.bob
+                spaceship.visible=False
+                print("11")
         #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)>0:
             #spaceship.y += spaceship.bob
         #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)==0:
