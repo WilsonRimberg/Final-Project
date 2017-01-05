@@ -32,8 +32,6 @@ class FactoryFloor(Sprite):
         super().__init__(FactoryFloor.factoryflr, position)
         self.scale=.15
         self.fxcenter = self.fycenter = 0.5
-chips_asset=ImageAsset("images/dipsiedoodles.png",)
-chips=Sprite(chips_asset, (1000,100))
 does=[]
 for x in range (0,14):
     does.append(FactoryFloor((1200-x*76,600)))
@@ -78,6 +76,9 @@ for x in range(0,7):
 for x in range(0,7):
     uno.append(Wall2((1287,87+x*88)))
 print(uno)
+chips_asset=ImageAsset("images/dipsiedoodles.png",)
+chips=Sprite(chips_asset, (1150,100))
+chips.scale=.2
 # Movement
 sun_asset = ImageAsset("images/sun.png",)
 sun=Sprite(sun_asset, (1150, 500))
@@ -95,7 +96,8 @@ potato.visible= True
 factory.visible=False
 sun.visible=False
 background3.visible=False
-
+chips.visible=False
+winning=False
 
 def left(b):
     spaceship.dir=-4
@@ -109,6 +111,10 @@ def step():
     if background1.visible==True:
         for x in does:
                 x.visible=False
+    if spaceship.collidingWith(chips) and chips.visible==True:
+            sun.visible=True
+            winning=True
+            chips.visible=False
     if spaceship.collidingWith(sun) and sun.visible==True:
             background2.visible=True
             background3.visible=False
@@ -126,9 +132,10 @@ def step():
             castle.visible=False
             potato.visible=False
             factory.visible=False
-            sun.visible=True
+            sun.visible=False
             spaceship.x=1050
             spaceship.y=550
+            chips.visible=True
             for x in uno:
                 x.visible=False
             for x in does:
