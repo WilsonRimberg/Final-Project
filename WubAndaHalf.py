@@ -94,6 +94,7 @@ factory.visible=False
 sun.visible=False
 background3.visible=False
 
+
 def left(b):
     spaceship.dir=-4
 def right(b):
@@ -158,7 +159,7 @@ def step():
             if spaceship.x<1300 and spaceship.x>300:
                 if spaceship.y<800 and spaceship.y>400:
                     spaceship.x+=spaceship.dir
-                if spaceship.y>30 and spaceship.y<300:
+                if spaceship.y>50 and spaceship.y<150:
                     spaceship.x+=spaceship.dir
                 else:
                      spaceship.x-=spaceship.dir
@@ -172,6 +173,12 @@ def step():
                     spaceship.x+=spaceship.dir
                 else:
                     spaceship.x-=spaceship.dir
+            if spaceship.x>1200:
+                spaceship.x-=spaceship.dir
+            if spaceship.x<210:
+                spaceship.x-=spaceship.dir
+            if spaceship.y>605:
+                spaceship.x-=spaceship.dir
         if spaceship.x +spaceship.width > 1280 and potato.visible==True:
              spaceship.x -= spaceship.dir
         if spaceship.x < 153 and potato.visible==True:
@@ -197,7 +204,7 @@ def ystep():
             if spaceship.x<1300 and spaceship.x>200:
                 if spaceship.y<605 and spaceship.y>520:
                     spaceship.y+=spaceship.bob
-                if spaceship.y>30 and spaceship.y<300:
+                if spaceship.y>50 and spaceship.y<150:
                     spaceship.y+=spaceship.bob
                 else:
                     spaceship.y-=spaceship.bob 
@@ -206,6 +213,12 @@ def ystep():
                     spaceship.y+=spaceship.bob
                 else:
                     spaceship.y-=spaceship.bob
+            if spaceship.x>1200:
+                spaceship.y-=spaceship.bob 
+            if spaceship.x<210:
+                spaceship.y-=spaceship.bob
+            if spaceship.y>605:
+                spaceship.y-=spaceship.bob
         #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)>0:
             #spaceship.y += spaceship.bob
         #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)==0:
