@@ -198,7 +198,7 @@ def step():
             if spaceship.y<400 and spaceship.y>30:
                 if spaceship.x<320 and spaceship.x>200:
                     spaceship.x+=spaceship.dir
-                else:
+                if spaceship.x>320 and spaceship.x<200:
                     spaceship.visible=False
                     print("3")
             if spaceship.x>1200:
