@@ -32,6 +32,8 @@ class FactoryFloor(Sprite):
         super().__init__(FactoryFloor.factoryflr, position)
         self.scale=.15
         self.fxcenter = self.fycenter = 0.5
+chips_asset=ImageAsset("images/dipsiedoodles.png",)
+chips=Sprite(chips_asset, (1000,100))
 does=[]
 for x in range (0,14):
     does.append(FactoryFloor((1200-x*76,600)))
@@ -301,4 +303,5 @@ myapp.listenKeyEvent('keyup', 'w', upUp)
 myapp.listenKeyEvent('keydown', 's', downKey)
 myapp.listenKeyEvent('keyup', 's', downUp)
 myapp.run(step)
+
 
