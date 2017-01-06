@@ -7,8 +7,10 @@ black=Color(0x000000, 1.0)
 edge=LineStyle(1,black)
 background_asset4=TextAsset("Game Over.", align='center', style='200px Arial', width=2000 )
 background_asset5=TextAsset("Press 'Return' to restart.", align='center', style='40px Arial', width=1000)
+background_asset6=TextAsset("Congrats, You Won", align='center', style='200px Arial', width=2000 )
 background4=Sprite(background_asset4, (200,0))
 background5=Sprite(background_asset5, (600,600))
+background6=Sprite(background_asset6, (200,0))
 background_asset1=ImageAsset("images/Green.png",)
 background_asset2=ImageAsset("images/starfield.jpg",)
 background_asset3=RectangleAsset(1420,810,edge, black)
@@ -98,7 +100,16 @@ sun.visible=False
 background3.visible=False
 chips.visible=False
 winning=False
-
+background4.visible=False
+background5.visible=False
+reset=False
+def tab(b):
+    global reset
+    if spaceship.visible==False:
+        spaceship.visible=True
+        reset=True
+        spaceship.x=400
+        spaceship.y=300
 def left(b):
     spaceship.dir=-4
 def right(b):
@@ -108,13 +119,30 @@ def up(b):
 def down(b):
     spaceship.bob=4
 def step():
+    global reset
+    global winning
+    if reset==True:
+        print('wub')
+        background1.visible=True
+        potato.visible=True
+        for x in uno:
+            x.visible=True
+        background4.visible=False
+        background5.visible=False
+    if background1.visible==True and winning==True:
+        spaceship.visible=False
+        background6.visible=True
+        background4.visible=True
     if background1.visible==True:
         for x in does:
+            if x.visible==True:
                 x.visible=False
     if spaceship.visible==False:
             background2.visible=False
             background1.visible=False
             background3.visible=False
+            background4.visible=True
+            background5.visible=True
             castle.visible=False
             potato.visible=False
             factory.visible=False
@@ -175,6 +203,7 @@ def step():
             spaceship.y=330
             for x in uno:
                 x.visible=False
+            reset=False
     if spaceship.go:
         spaceship.x += spaceship.dir
         if spaceship.x + spaceship.width > SCREEN_WIDTH:
@@ -186,7 +215,6 @@ def step():
                 if spaceship.y<150 and spaceship.y:
                     spaceship.x+=spaceship.dir
                 if spaceship.y>150 and spaceship.y<520:
-                     spaceship.x-=spaceship.dir
                      spaceship.visible=False
                      print("1")
             if spaceship.x<320 and spaceship.x>250:
@@ -238,7 +266,6 @@ def ystep():
                 if spaceship.y>50 and spaceship.y<150:
                     spaceship.y+=spaceship.bob
                 if spaceship.y>150 and spaceship.y<520:
-                    spaceship.y-=spaceship.bob
                     spaceship.visible=False
                     print("7")
             if spaceship.x<320 and spaceship.x>180:
@@ -256,10 +283,6 @@ def ystep():
             if spaceship.y>605:
                 spaceship.visible=False
                 print("11")
-        #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)>0:
-            #spaceship.y += spaceship.bob
-        #if background3.visible==True and spaceship.collidingWithSprites(self, sclass=FactoryFloor)==0:
-            #spaceship.x -= spaceship.bob
         if spaceship.y +spaceship.height > 722 and potato.visible==True:
              spaceship.y -= spaceship.bob
         if spaceship.y < 104 and potato.visible==True:
@@ -324,9 +347,9 @@ def downUp(event):
     spaceship.ygo= False
     spaceship.thrust = 1
     down(spaceship)
-    
-def stopx(event):
-    spaceship.dir-=0
+
+def returnDown(event):
+    tab(spaceship)
 
 myapp = App(SCREEN_WIDTH, SCREEN_HEIGHT)
 myapp.listenKeyEvent('keydown', 'a', leftKey)
@@ -337,6 +360,7 @@ myapp.listenKeyEvent('keydown', 'w', upKey)
 myapp.listenKeyEvent('keyup', 'w', upUp)
 myapp.listenKeyEvent('keydown', 's', downKey)
 myapp.listenKeyEvent('keyup', 's', downUp)
+myapp.listenKeyEvent('keydown', 'tab', returnDown)
 myapp.run(step)
 
 
