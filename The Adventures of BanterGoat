@@ -1,5 +1,4 @@
-# Title of Your Project Here
-
+The Adventures 
 
 
 ## Functional Specification
@@ -14,17 +13,17 @@ Your specification **should include** the following types of information:
 
 Summary: My program will be a 90s RPG in the form of one of the original Dragon Quests, Final Fantasies, or Chrono Trigger. Basically, the player is an automatically generated player (can't customize appearence) who can wander through various zones, fights enemies, etc. Therre will hopefully be some sort of loot system, but whether or not that system will actually do anything is up in the air.
 
-Method of Sharing: The program will be shared through Run
+Method of Sharing: The program will be shared through Runpython
 
-Graphic Screens: The first graphic scene will be of the main character's house, where they will start the game. The second part graphic screen will be some sort of world outside the house (maybe an island) that will lead the main character to some sort of dungeon the third screen. The final screen will be some sort of combat screen for when the player fights enemies in the dungeon.
+Graphic Screens: The first graphic scene will be of the main character's house, where they will start the game. The second part graphic screen will be of the world outside that will lead the main character to a potato chip factory is the third screen. In this screen, the player character will die if they touch any of the walls that will be rendered along with the screen. The final backgrounds are winning and losing screens that trigger depending on whether or not the player wins or loses
 
-Inputs: For the the first three graphics screens, the player will press keys to make the player move and maybe press return to interact with some objects (like doors). In the fourth screen, the player will use the mouse to select attack options (and maybe spells) to defeat the enemies.
+Inputs: For the the first three graphics screens, the player will press keys to make the player move and maybe press return to interact with some objects (like doors). WASD will be used to move. In the winning/losing screens, the player will use the 'tab' button to restart the game if they so choose.
 
-Mouse Input: Yes, see above
+Mouse Input: Nope
 
-Keyboard input: Yes, arrow keys or WASD to move. Return to interact with objects (maybe)
+Keyboard input: Yes, arrow keys or WASD to move. Tab to restart.
 
-Graphical Assets: Main character, a few enemies, maybe some environs
+Graphical Assets: Main character, walls, a door, a catle/house, a factory, factory floors, stairs, and a bag of potato chips
 
 Installation: Nope
 
