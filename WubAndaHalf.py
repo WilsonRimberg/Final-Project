@@ -4,6 +4,7 @@ from ggame import LineStyle, Color, Sprite, Sound, Frame
 SCREEN_WIDTH = 1420
 SCREEN_HEIGHT = 810
 black=Color(0x000000, 1.0)
+blue = Color(0x0000ff, 1.0)
 edge=LineStyle(1,black)
 background_asset4=TextAsset("Game Over.", align='center', style='200px Arial', width=2000 )
 background_asset5=TextAsset("Press 'Return' to restart.", align='center', style='40px Arial', width=1000)
@@ -11,10 +12,10 @@ background_asset6=TextAsset("Congrats, You Won", align='center', style='200px Ar
 background4=Sprite(background_asset4, (200,0))
 background5=Sprite(background_asset5, (600,600))
 background6=Sprite(background_asset6, (200,0))
-background_asset1=ImageAsset("images/Green.png",)
-background_asset2=ImageAsset("images/starfield.jpg",)
+background_asset1=RectangleAsset(1220,650, edge, blue)
+background_asset2=ImageAsset("images/Green.png",)
 background_asset3=RectangleAsset(1420,810,edge, black)
-background1=Sprite(background_asset1, (0,0))
+background1=Sprite(background_asset1, (70,30))
 background2=Sprite(background_asset2, (0,0))
 background3=Sprite(background_asset3, (0,0))
 castle_asset = ImageAsset("images/castleyeah.png",)
@@ -84,6 +85,7 @@ chips.scale=.2
 # Movement
 sun_asset = ImageAsset("images/sun.png",)
 sun=Sprite(sun_asset, (1150, 500))
+#sun.scale=.5
 sun.center=.5
 spaceship.dir = 3
 spaceship.bob=3
@@ -103,11 +105,13 @@ winning=False
 background4.visible=False
 background5.visible=False
 reset=False
+background6.visible=False
 def tab(b):
     global reset
     if spaceship.visible==False:
         spaceship.visible=True
         reset=True
+        print("working")
         spaceship.x=400
         spaceship.y=300
 def left(b):
@@ -129,10 +133,14 @@ def step():
             x.visible=True
         background4.visible=False
         background5.visible=False
+        background6.visible=False
+        reset=False
+        winning=False
+        print("oh god why")
     if background1.visible==True and winning==True:
         spaceship.visible=False
         background6.visible=True
-        background4.visible=True
+        background5.visible=True
     if background1.visible==True:
         for x in does:
             if x.visible==True:
@@ -141,8 +149,11 @@ def step():
             background2.visible=False
             background1.visible=False
             background3.visible=False
-            background4.visible=True
             background5.visible=True
+            if winning==False:
+                background4.visible=True
+            else:
+                background4.visible=False
             castle.visible=False
             potato.visible=False
             factory.visible=False
